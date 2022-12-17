@@ -1,0 +1,27 @@
+costOfNewspaper={"TOI":26,"Hindu":20.5,"ET":34,"BM":10.5,"HT":18}
+names=list(costOfNewspaper.keys())
+combinations={}
+
+# print(names)
+def calculate(cost):
+    temp=cost
+    ans=set()
+    for i in range(len(names)):
+        temp=cost
+        temp-=costOfNewspaper[names[i]]
+        for j in range(len(names)):
+            if i != j:
+                # print(i,j)
+                if temp>=costOfNewspaper[names[j]]:
+                    if (names[j],names[i]) in ans:
+                        continue
+                    ans.add((names[i],names[j]))
+                    temp-=costOfNewspaper[names[j]]
+    return ans
+                
+
+n=int(input("Enter the number of inputs\n"))
+while(n):
+    cost=int(input("Enter the budget\n"))
+    print(calculate(cost))
+    n-=1
